@@ -2,13 +2,14 @@ const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
 const { calls } = require("../store");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
 /**
  * Create a call
  */
-router.post("/", async (request, result) => {
+router.post("/", auth, async (request, result) => {
   const { customerName, phoneNumber, workflow } = request.body;
 
   if (!customerName || !phoneNumber || !workflow) {
@@ -21,6 +22,7 @@ router.post("/", async (request, result) => {
     phoneNumber,
     workflow,
     status: "pending",
+    retries: 0,
     createdAt: new Date().toISOString(),
   };
 
@@ -37,7 +39,7 @@ router.post("/", async (request, result) => {
 /**
  * List all calls
  */
-router.get("/", result => {
+router.get("/", auth, (request, result) => {
   result.json(calls);
 });
 
