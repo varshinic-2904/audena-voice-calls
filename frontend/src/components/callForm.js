@@ -8,12 +8,19 @@ export default function CallForm({ onCreated }) {
     phoneNumber: "",
     workflow: "Support",
   });
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createCall(form);
-    setForm({ customerName: "", phoneNumber: "", workflow: "Support" });
-    onCreated();
+    setError(null);
+
+    try {
+      await createCall(form);
+      setForm({ customerName: "", phoneNumber: "", workflow: "Support" });
+      onCreated();
+    } catch (err) {
+      setError("Unable to create call. Please try again.");
+    }
   };
 
   return (
@@ -44,6 +51,7 @@ export default function CallForm({ onCreated }) {
       </select>
 
       <button type="submit">Submit</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 }

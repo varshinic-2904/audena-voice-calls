@@ -17,7 +17,7 @@ export default function CallList({ calls }) {
               <td>{call.customerName}</td>
               <td>{call.phoneNumber}</td>
               <td>{call.workflow}</td>
-              <td>{call.status}</td>
+              <td>{call.status} {call.retries > 0 && `(retries: ${call.retries})`}</td>
             </tr>
           ))}
         </tbody>
