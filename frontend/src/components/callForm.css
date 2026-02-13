@@ -1,0 +1,21 @@
+.call-form {
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+
+.call-form h3 {
+  margin-bottom: 16px;
+}
+
+.call-form input,
+.call-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.call-form button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
